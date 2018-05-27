@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='remotecv_aws',
-    version='0.1',
+    version='0.2',
     description='Remotecv AWS loader',
     author='Edu Heraiz @ APSL',
     author_email='gshark@gmail.com',
