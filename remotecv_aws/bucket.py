@@ -4,7 +4,7 @@
 # Use of this source code is governed by the MIT license that can be
 # found in the LICENSE file.
 
-import boto3
+from boto3.session import Session
 
 class Bucket(object):
     """
@@ -13,7 +13,7 @@ class Bucket(object):
     _bucket      = None
     _local_cache = dict()
 
-    def __init__(self, bucket, region, accessKeyId, secretAccessKey, endPoint):
+    def __init__(self, bucket, region, accessKeyId, secretAccessKey):
         """
         Constructor
         :param string bucket: The bucket name
@@ -25,22 +25,22 @@ class Bucket(object):
         """
         self._bucket = bucket
         
-        session = boto3.session.Session()
+        session = Session(
+                        aws_access_key_id=accessKeyId,
+                        aws_secret_access_key=secretAccessKey,
+                        region_name=region
+                  )
 
-        self._client = session.client(
-            service_name='s3',
-            aws_access_key_id=accessKeyId,
-            aws_secret_access_key=secretAccessKey,
-            region_name=region,
-            endpoint_url=endPoint,
-        )
+        self._client = session.resource('s3')
 
     def get(self, path):
         """
         Returns object at given path
         :param string path: Path or 'key' to retrieve AWS object
         """
-        file_path = self._client.Object( Bucket=self._bucket, Key=path)
+
+        file_path = self._client.Bucket(self._bucket).Object(path).get()
+
         return file_path['Body'].read()
         
 
