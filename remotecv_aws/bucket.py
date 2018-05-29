@@ -20,8 +20,7 @@ class Bucket(object):
         :param string region: The AWS API region to use
         :param string accessKeyId: The AWS access key ID for accessing the bucket
         :param string secretAccessKey: The AWS secret access key for accessing the bucket
-        :param string endPoint: The AWS bucket custom end point
-        :return: The created bucket
+        :return: The created AWS client for the bucket 
         """
         self._bucket = bucket
         
