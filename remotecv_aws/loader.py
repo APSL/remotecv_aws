@@ -14,6 +14,8 @@ def load_sync(path):
     """
     bucket = os.environ.get('AWS_LOADER_BUCKET')
     region = os.environ.get('AWS_REGION', 'eu-west-1')
-    bucket_loader = Bucket(bucket, region)
+    accessKeyId = os.environ.get('AWS_ACCESS_KEY_ID')
+    secretAccessKey = os.environ.get('AWS_SECRET_KEY_ID')
+    bucket_loader = Bucket(bucket, region, accessKeyId, secretAccessKey)
 
     return bucket_loader.get(path)

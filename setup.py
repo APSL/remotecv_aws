@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='remotecv_aws',
-    version='0.1',
+    version='0.2',
     description='Remotecv AWS loader',
     author='Edu Heraiz @ APSL',
     author_email='gshark@gmail.com',
@@ -12,7 +12,7 @@ setup(
     include_package_data=True,
     packages=find_packages(),
     install_requires=[
-        'botocore>=1.2.0',
+        'boto3',
     ],
     extras_require={
     },
